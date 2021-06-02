@@ -51,7 +51,7 @@ export default function detail({ id }) {
       <body>
         <div className="p-5 max-w-7xl m-auto">
           <div
-            className="text-xl pb-5 font-semibold inline-flex items-center cursor-pointer hover:text-yellow-300"
+            className="text-xl font-semibold inline-flex items-center cursor-pointer hover:text-yellow-300"
             onClick={() => {
               router.push({
                 pathname: "/",
@@ -62,7 +62,7 @@ export default function detail({ id }) {
             <div className="tracking-widest font-normal pl-1">Popcorn</div>
           </div>
         </div>
-        <div className="pt-5 md:px-20 lg:px-32 max-w-7xl m-auto">
+        <div className="px-5 md:px-20 lg:px-32 max-w-7xl m-auto">
           <div className="mb-2 sm:hidden">
             <Image
               src={`${BASE_URL}${movie.backdrop_path}`}
@@ -85,9 +85,9 @@ export default function detail({ id }) {
                 <div className="flex items-baseline pb-2">
                   <span className="text-2xl sm:text-3xl">
                     {movie.title}
-                    <mark className="ml-1 text-sm sm:text-lg bg-gray-900 text-gray-300">
+                    {/* <mark className="ml-1 text-sm sm:text-lg bg-gray-900 text-gray-300">
                       ({year})
-                    </mark>{" "}
+                    </mark>{" "} */}
                   </span>
                 </div>
                 <div>

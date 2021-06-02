@@ -15,7 +15,7 @@ export default function Home({ results }) {
       <body>
         <div className="p-5 max-w-7xl m-auto">
           <div
-            className="text-xl pb-5 font-semibold inline-flex items-center cursor-pointer hover:text-yellow-300"
+            className="text-xl font-semibold inline-flex items-center cursor-pointer hover:text-yellow-300"
             onClick={() => {
               router.push({
                 pathname: "/",
@@ -25,8 +25,8 @@ export default function Home({ results }) {
             <GiPopcorn />
             <div className="tracking-widest font-normal pl-1">Popcorn</div>
           </div>
-          <div className="md:px-20 lg:px-32 max-w-7xl m-auto">
-            <div className="flex py-5">
+          <div className="pt-5 md:px-20 lg:px-32 max-w-7xl m-auto">
+            <div className="flex py-5 w-full overflow-y-scroll whitespace-nowrap">
               {Object.entries(requests).map(([key, { title, url }]) => (
                 <h2
                   className="mr-4 cursor-pointer"
