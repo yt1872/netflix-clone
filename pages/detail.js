@@ -11,7 +11,7 @@ import { useRouter } from "next/router";
 export default function detail({ id }) {
   const [movie, setMovie] = useState(null);
   const [trailer, setTrailer] = useState(null);
-  //   const [tv, setTV] = useState(null);
+  const [casts, setCast] = useState(null);
 
   const BASE_URL = "https://image.tmdb.org/t/p/original/";
 
@@ -20,17 +20,19 @@ export default function detail({ id }) {
   const API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY;
   const movieAPI = `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`;
   const trailerAPI = `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}`;
-  //   const tvAPI = `https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}`;
+  const castAPI = `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}`;
 
-  const getMovie = async () => {
+  const getDetail = async () => {
     const response = await axios.get(movieAPI);
     setMovie(response.data);
     const responseTrailer = await axios.get(trailerAPI);
     setTrailer(responseTrailer.data.results[0]);
+    const responseCast = await axios.get(castAPI);
+    setCast(responseCast.data.cast);
   };
 
   useEffect(() => {
-    getMovie();
+    getDetail();
   }, [movieAPI]);
 
   let year = "";
@@ -39,7 +41,12 @@ export default function detail({ id }) {
     year = releaseDate.getFullYear();
   }
 
-  if (!movie || !trailer) {
+  let castCount = "";
+  if (casts) {
+    castCount = casts.length;
+  }
+
+  if (!movie || !trailer || !casts) {
     return null;
   }
   return (
@@ -125,12 +132,38 @@ export default function detail({ id }) {
                   <BsChatQuoteFill className="mr-2" />"{movie.tagline}"
                 </div>
               </div>
-              <div className="py-4 hidden md:block">
+              <div className="pt-4">
+                <span className="tracking-widest pl-2 border-l-4 border-yellow-300">
+                  CAST
+                </span>
+                <div className="pt-4">
+                  <div className="flex overflow-x-scroll scrollbar-hide space-x-4">
+                    {/* <div className={`grid grid-flow-row grid-cols-${castCount}`}> */}
+                    {Object.entries(casts.slice(0, 10)).map(([key, cast]) => (
+                      <div className="" key={key}>
+                        <Image
+                          src={`${BASE_URL}${cast.profile_path}`}
+                          layout="responsive"
+                          height={350}
+                          width={276}
+                        />
+                        <div className="truncate w-28 text-sm pt-1">
+                          {cast.name}
+                        </div>
+                        <div className="truncate w-28 text-xs text-gray-500">
+                          {cast.character}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              {/* <div className="py-4 hidden md:block">
                 <span className="tracking-widest pl-2 border-l-4 border-yellow-300">
                   OVERVIEW
                 </span>
                 <div className="text-sm mt-2">{movie.overview}</div>
-              </div>
+              </div> */}
             </div>
           </div>
           <div className="py-4 md:hidden">
@@ -139,7 +172,7 @@ export default function detail({ id }) {
             </span>
             <div className="text-sm mt-2">{movie.overview}</div>
           </div>
-          <div className="py-8">
+          <div className="py-4">
             <span className="tracking-widest pl-2 border-l-4 border-yellow-300">
               TRAILER
             </span>

@@ -41,22 +41,13 @@ function Thumbnail({ result, index }) {
         <FaPlayCircle className="hidden h-10 w-10" />
       </div>
       {/* <div className="hidden line-clamp-3">{result.overview}</div> */}
-      <div className="flex">
-        <div className="flex items-center pt-2">
+      <div className="flex justify-between items-start pt-3">
+        <div className="text-lg line-clamp-2">{result.title}</div>
+        <div className="flex items-center leading-7">
           <StarIcon className="h-5 mr-1 text-yellow-300" />
           {result.vote_average}
         </div>
-        {/* <div className="flex items-center mr-4 bg-gray-800 px-2 py-1 rounded">
-          <UserGroupIcon className="h-5 mr-1" />
-          {result.vote_count}
-        </div>
-        <div className="flex items-center mr-4 bg-gray-800 px-2 py-1 rounded">
-          <CalendarIcon className="h-5 mr-1" />
-          {year}
-        </div> */}
       </div>
-      <div className="text-lg line-clamp-2">{result.title || result.name}</div>
-      {/* <div onClick={getTrailer}>Trailer</div> */}
     </div>
   );
 }

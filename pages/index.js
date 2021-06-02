@@ -25,11 +25,11 @@ export default function Home({ results }) {
             <GiPopcorn />
             <div className="tracking-widest font-normal pl-1">Popcorn</div>
           </div>
-          <div className="pt-5 md:px-20 lg:px-32 max-w-7xl m-auto">
-            <div className="flex py-5 w-full overflow-y-scroll whitespace-nowrap">
+          <div className="relative">
+            <div className="flex py-5 w-full overflow-y-scroll whitespace-nowrap space-x-8 sm:space-x-10 md:space-x-12 scrollbar-hide">
               {Object.entries(requests).map(([key, { title, url }]) => (
                 <h2
-                  className="mr-4 cursor-pointer"
+                  className="cursor-pointer last:pr-12"
                   onClick={() => router.push(`/?genre=${key}`)}
                   key={key}
                 >
@@ -37,8 +37,9 @@ export default function Home({ results }) {
                 </h2>
               ))}
             </div>
-            <Results results={results} />
+            <div className="absolute top-0 right-0 bg-gradient-to-l from-gray-900 h-12 w-1/12 pt-5" />
           </div>
+          <Results results={results} />
         </div>
       </body>
     </div>
@@ -50,7 +51,7 @@ export async function getServerSideProps(context) {
 
   const request = await fetch(
     `https://api.themoviedb.org/3${
-      requests[genre]?.url || requests.fetchPopular.url
+      requests[genre]?.url || requests.fetchTrending.url
     }`
   ).then((res) => res.json());
 
