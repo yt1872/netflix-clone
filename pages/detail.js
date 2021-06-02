@@ -152,10 +152,10 @@ export default function detail({ id }) {
                           height={390}
                           width={276}
                         />
-                        <div className="truncate w-28 text-sm pt-1 font-semibold">
+                        <div className="truncate w-28 sm:w-32 text-sm pt-1 font-semibold">
                           {cast.name}
                         </div>
-                        <div className="truncate w-28 text-xs text-gray-500">
+                        <div className="truncate w-28 sm:w-32 text-xs text-gray-500">
                           {cast.character}
                         </div>
                       </div>
