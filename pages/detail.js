@@ -142,7 +142,7 @@ export default function detail({ id }) {
                 <span className="tracking-widest pl-2 border-l-4 border-yellow-300">
                   CAST
                 </span>
-                <div className="pt-4">
+                <div className="pt-4 relative">
                   <div className="flex overflow-x-scroll scrollbar-hide space-x-4">
                     {Object.entries(casts.slice(0, 10)).map(([key, cast]) => (
                       <div className="" key={key}>
@@ -161,6 +161,7 @@ export default function detail({ id }) {
                       </div>
                     ))}
                   </div>
+                  <div className="absolute top-0 -right-1 bg-gradient-to-l from-gray-900 h-60 w-12" />
                 </div>
               </div>
             </div>

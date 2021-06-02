@@ -10,6 +10,7 @@ export default function Home({ results }) {
     <div className="">
       <Head>
         <title>Popcorn</title>
+
         <link rel="icon" href="/popcorn.svg" />
       </Head>
       <body>
@@ -37,7 +38,7 @@ export default function Home({ results }) {
                 </h2>
               ))}
             </div>
-            <div className="absolute top-0 right-0 bg-gradient-to-l from-gray-900 h-12 w-1/12 pt-5" />
+            <div className="absolute top-0 -right-1 bg-gradient-to-l from-gray-900 h-12 w-12 pt-5" />
           </div>
           <Results results={results} />
         </div>
