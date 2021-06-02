@@ -7,6 +7,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import YouTube from "react-youtube";
 
 export default function detail({ id }) {
   const [movie, setMovie] = useState(null);
@@ -45,6 +46,15 @@ export default function detail({ id }) {
   if (casts) {
     castCount = casts.length;
   }
+
+  const opts = {
+    height: "100%",
+    width: "100%",
+    playerVars: {
+      // https://developers.google.com/youtube/player_parameters
+      autoplay: 0,
+    },
+  };
 
   if (!movie || !trailer || !casts) {
     return null;
@@ -89,13 +99,16 @@ export default function detail({ id }) {
             </div>
             <div className="w-full sm:w-3/4 sm:pl-6">
               <div className="flex justify-between w-full">
-                <div className="flex items-baseline pb-2">
-                  <span className="text-2xl sm:text-3xl">
+                <div className="pb-2">
+                  <p className="text-2xl sm:text-3xl">
                     {movie.title}
                     {/* <mark className="ml-1 text-sm sm:text-lg bg-gray-900 text-gray-300">
                       ({year})
                     </mark>{" "} */}
-                  </span>
+                  </p>
+                  <p className="italic text-sm text-gray-500">
+                    "{movie.tagline}"
+                  </p>
                 </div>
                 <div>
                   <div className="flex items-center">
@@ -109,27 +122,29 @@ export default function detail({ id }) {
                   </div>
                 </div>
               </div>
-              <div className="flex pb-2">
-                {Object.entries(movie.genres).map(([key, { id, name }]) => (
-                  <p
-                    className="mr-2 border border-gray-300 rounded py-1 px-2 text-sm"
-                    key={key}
-                  >
-                    {name}
-                  </p>
-                ))}
-              </div>
-              <div className="text-sm">
-                <div className="flex items-center mb-1">
-                  <FaClock className="mr-2" />
-                  {movie.runtime} mins
+              <div className="flex">
+                <div className="text-sm w-1/3">
+                  <div className="flex items-center mb-1">
+                    <FaClock className="mr-2" />
+                    {movie.runtime} mins
+                  </div>
+                  <div className="flex items-center mb-1">
+                    <FaRegCalendarAlt className="mr-2" />
+                    {movie.release_date}
+                  </div>
+                  {/* <div className="flex items-center mb-1 italic">
+                    <BsChatQuoteFill className="mr-2" />"{movie.tagline}"
+                  </div> */}
                 </div>
-                <div className="flex items-center mb-1">
-                  <FaRegCalendarAlt className="mr-2" />
-                  {movie.release_date}
-                </div>
-                <div className="flex items-center mb-1">
-                  <BsChatQuoteFill className="mr-2" />"{movie.tagline}"
+                <div className="flex justify-end items-start w-2/3 space-x-2 flex-wrap">
+                  {Object.entries(movie.genres).map(([key, { id, name }]) => (
+                    <div
+                      className="border border-gray-300 rounded py-1 px-2 mb-2 text-xs whitespace-nowrap"
+                      key={key}
+                    >
+                      {name}
+                    </div>
+                  ))}
                 </div>
               </div>
               <div className="pt-4">
@@ -144,10 +159,10 @@ export default function detail({ id }) {
                         <Image
                           src={`${BASE_URL}${cast.profile_path}`}
                           layout="responsive"
-                          height={350}
+                          height={390}
                           width={276}
                         />
-                        <div className="truncate w-28 text-sm pt-1">
+                        <div className="truncate w-28 text-sm pt-1 font-semibold">
                           {cast.name}
                         </div>
                         <div className="truncate w-28 text-xs text-gray-500">
@@ -166,7 +181,7 @@ export default function detail({ id }) {
               </div> */}
             </div>
           </div>
-          <div className="py-4 md:hidden">
+          <div className="py-4">
             <span className="tracking-widest pl-2 border-l-4 border-yellow-300">
               OVERVIEW
             </span>
@@ -176,18 +191,14 @@ export default function detail({ id }) {
             <span className="tracking-widest pl-2 border-l-4 border-yellow-300">
               TRAILER
             </span>
-            <div className="pt-6 sm:px-12 md:px-20 lg:px-28">
+            <div className="pt-6 ">
               {trailer ? (
                 <div className="w-full h-0 relative pb-iframe">
-                  <iframe
+                  <YouTube
+                    videoId={trailer.key}
+                    opts={opts}
                     className="absolute w-full h-full"
-                    id="player"
-                    type="text/html"
-                    width="100%"
-                    height="100%"
-                    src={`http://www.youtube.com/embed/${trailer.key}?enablejsapi=1&origin=http://example.com`}
-                    frameborder="0"
-                  ></iframe>
+                  />
                 </div>
               ) : (
                 <div></div>
