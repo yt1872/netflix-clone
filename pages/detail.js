@@ -51,7 +51,6 @@ export default function detail({ id }) {
     height: "100%",
     width: "100%",
     playerVars: {
-      // https://developers.google.com/youtube/player_parameters
       autoplay: 0,
     },
   };
@@ -100,12 +99,7 @@ export default function detail({ id }) {
             <div className="w-full sm:w-3/4 sm:pl-6">
               <div className="flex justify-between w-full">
                 <div className="pb-2">
-                  <p className="text-2xl sm:text-3xl">
-                    {movie.title}
-                    {/* <mark className="ml-1 text-sm sm:text-lg bg-gray-900 text-gray-300">
-                      ({year})
-                    </mark>{" "} */}
-                  </p>
+                  <p className="text-2xl sm:text-3xl">{movie.title}</p>
                   <p className="italic text-sm text-gray-500">
                     "{movie.tagline}"
                   </p>
@@ -132,9 +126,6 @@ export default function detail({ id }) {
                     <FaRegCalendarAlt className="mr-2" />
                     {movie.release_date}
                   </div>
-                  {/* <div className="flex items-center mb-1 italic">
-                    <BsChatQuoteFill className="mr-2" />"{movie.tagline}"
-                  </div> */}
                 </div>
                 <div className="flex justify-end items-start w-2/3 space-x-2 flex-wrap">
                   {Object.entries(movie.genres).map(([key, { id, name }]) => (
@@ -153,7 +144,6 @@ export default function detail({ id }) {
                 </span>
                 <div className="pt-4">
                   <div className="flex overflow-x-scroll scrollbar-hide space-x-4">
-                    {/* <div className={`grid grid-flow-row grid-cols-${castCount}`}> */}
                     {Object.entries(casts.slice(0, 10)).map(([key, cast]) => (
                       <div className="" key={key}>
                         <Image
@@ -173,12 +163,6 @@ export default function detail({ id }) {
                   </div>
                 </div>
               </div>
-              {/* <div className="py-4 hidden md:block">
-                <span className="tracking-widest pl-2 border-l-4 border-yellow-300">
-                  OVERVIEW
-                </span>
-                <div className="text-sm mt-2">{movie.overview}</div>
-              </div> */}
             </div>
           </div>
           <div className="py-4">

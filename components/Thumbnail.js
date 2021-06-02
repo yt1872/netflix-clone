@@ -28,7 +28,6 @@ function Thumbnail({ result, index }) {
       }}
     >
       <div className="">
-        {/* <p>{index}</p> */}
         <Image
           src={
             `${BASE_URL}${result.poster_path || result.poster_path}` ||
@@ -40,7 +39,6 @@ function Thumbnail({ result, index }) {
         />
         <FaPlayCircle className="hidden h-10 w-10" />
       </div>
-      {/* <div className="hidden line-clamp-3">{result.overview}</div> */}
       <div className="flex justify-between items-start pt-3">
         <div className="text-lg line-clamp-2">{result.title}</div>
         <div className="flex items-center leading-7">
