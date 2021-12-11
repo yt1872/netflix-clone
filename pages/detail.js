@@ -150,7 +150,7 @@ export default function detail({ id }) {
                           src={`${BASE_URL}${cast.profile_path}`}
                           layout="responsive"
                           height={390}
-                          width={276}
+                          width={266}
                         />
                         <div className="truncate w-28 sm:w-32 text-xs pt-1 font-semibold">
                           {cast.name}
